@@ -441,17 +441,15 @@
         <h2 class="text-3xl md:text-4xl font-bold">Custom Order</h2>
         <p class="mt-3 text-slate-300"><b>Tell me your idea—I'll reply with a quote in minutes during 10am–10pm.</b></p>
       </div>
-  <form id="customOrderForm" class="grid gap-4" action="/submit" method="POST" autocomplete="on">
-    <!-- Dummy hidden inputs to absorb unwanted browser autofill (keep before real inputs) -->
-    <input type="text" autocomplete="username" name="prevent_autofill_username" id="prevent_autofill_username" style="position: absolute; left: -9999px; top: -9999px; opacity: 0; height: 0; width: 0; border: 0; padding: 0;" tabindex="-1" />
-    <input type="email" autocomplete="email" name="prevent_autofill_email" id="prevent_autofill_email" style="position: absolute; left: -9999px; top: -9999px; opacity: 0; height: 0; width: 0; border: 0; padding: 0;" tabindex="-1" />
+  <form id="customOrderForm" class="grid gap-4" action="/submit" method="POST" autocomplete="off">
+    <!-- Disable autofill completely -->
         <div class="grid md:grid-cols-2 gap-4">
           <div>
             <label for="cust-name" class="block font-bold text-[#800000]">Your name</label>
             <input type="text"
                    id="cust-name" 
                    name="name"
-                   autocomplete="name"
+                   autocomplete="new-password"
                    required 
                    class="rounded-xl bg-white/5 ring-1 ring-white/10 p-3 mt-1" 
                    placeholder="Your name">
@@ -461,24 +459,24 @@
             <input type="tel"
                    id="cust-phone" 
                    name="phone"
-                   autocomplete="tel"
+                   autocomplete="new-password"
                    required 
                    class="rounded-xl bg-white/5 ring-1 ring-white/10 p-3 mt-1" 
                    placeholder="WhatsApp number">
           </div>
         </div>
         <div>
-          <label for="cust-email-display" class="block font-bold text-[#800000]">Email</label>
-          <!-- visible display input: intentionally NOT named 'email' so browsers won't detect it as an email field -->
-          <input type="text"
-                 id="cust-email-display" 
-                 data-email-display
-                 autocomplete="off"
+          <label for="cust-email" class="block font-bold text-[#800000]">Email</label>
+          <!-- Using new-password to aggressively prevent autofill -->
+          <input type="email"
+                 id="cust-email" 
+                 name="not_email"
+                 autocomplete="new-password"
                  required
                  class="rounded-xl bg-white/5 ring-1 ring-white/10 p-3 mt-1" 
                  placeholder="Email address">
-          <!-- real email value for submission (kept hidden to avoid browser heuristics) -->
-          <input type="hidden" name="email" id="cust-email" value="">
+          <!-- Real submission value -->
+          <input type="hidden" name="email" value="" autocomplete="off">
         </div>
         <div>
           <label for="cust-body" class="block font-bold text-[#800000]">Describe colours, size, text, reference image link</label>
